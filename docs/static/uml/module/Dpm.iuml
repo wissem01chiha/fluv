@@ -1,0 +1,5 @@
+!include ../system/template.iuml
+
+package "Data Processing System" as e_aab3b908be384850b018019f7a288c03 {
+component "Data Chunker Engine" <<component>> as e_e445d9ce4d4043328faf32a41e3a4cd8
+}

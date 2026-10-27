@@ -1,0 +1,22 @@
+!include ../system/template.iuml
+
+package "Engine Event Manager" as e_5a33a9739cb14ae4b58149dc744b0133 {
+    component "Event Gateway" <<component>> as e_fd15c7717b894b0084c61f6e41ddf788
+    component "Event Dispatcher" <<component>> as e_4e4cebfcd49d4c0fb64ad971775f0e31
+    component "Event Source Manager" <<component>> as e_ee0b821a07ff488d8c244e9799d1fce7
+    component "Event Tracing Manager" <<component>> as e_0b57e6448845402cb11a5c8d7b02bec8
+    package "Event Source Manager" as e_e1e2f266d7634b8c984be08c5ed18ad2 {
+        component "Removing Producers" <<component>> as e_535fd96dbc094df89e76451aa26d5b95
+        component "Adding Event Producers" <<component>> as e_8bad2d0b20374be19a159eba6b85a47e
+        
+    }
+}
+
+
+note right of e_5a33a9739cb14ae4b58149dc744b0133
+This package manages general purpose events triggered
+by components within the system, this events
+are not diagnostic or failure events, rather they 
+represent custom events specific to the applications
+logic.
+end note

@@ -1,0 +1,6 @@
+!include ../system/template.iuml
+
+component "Token Transmission Manager" <<Grouping>> as e_9c608e6ad717491ea562f736b0770ddb{
+
+  
+}

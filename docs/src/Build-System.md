@@ -1,0 +1,3 @@
+fbb is built around [CDD](https://www.agilelonestar.com/knowledge-base/cdd) software development approach. That means a component is completely defined by two files: the component source code, which contains the functional logic, and an intrinsic configuration file, which defines general configuration parameters like ports, execution patterns, and others. These are consumed by the fbb built-in build system to compile the full software.
+
+At first we might think that the component configuration file is in XML, JSON, or another format, but no: fbb has its own build wrapper written entirely in C#. Although XML is a compact format for storing data, navigating large XML or JSON files is painful, and parsing them will slow down builds significantly.

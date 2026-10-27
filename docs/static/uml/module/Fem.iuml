@@ -1,0 +1,137 @@
+!include ../system/template.iuml
+
+package "Fault Event Manager" as e_3787e043df0342c8bab7200299b751b4 #CFE2F3 {
+    rectangle "FaultId" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb89d
+    rectangle "FaultKind" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb89e
+    rectangle "FemFaultStatus" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb89f
+    rectangle "FemEventParameter" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a0
+    rectangle "FemCausalityDelayTime" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a3
+    rectangle "FemFaultSeverity" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a4
+    rectangle "FemFaultPriority" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a5
+    rectangle "FemConfirmedFaultAction" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a6
+    rectangle "FemEscalationPolicy" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a7
+    rectangle "FemQualificationStrategy" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a8
+    rectangle "FemOccurrenceThreshold" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a9
+    rectangle "FemQualificationWindow" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8aa
+    rectangle "FemComponent" <<component>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a1
+    rectangle "FemComponentStatus" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8a2
+    rectangle "FemComponentId" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8ab
+    rectangle "FemParentComponent" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8ac
+    rectangle "FemComponentPriority" <<parameter>> as ddb20b45_7347_49ef_9d0b_3f40c52bb8ad
+
+}
+
+!include Fsm.iuml
+!include Dlm.iuml
+
+e_3787e043df0342c8bab7200299b751b4   ..> f38a2175_0e55_4799_a6d1_46d26538a71c :  publishes confirmed faults.
+ddb20b45_7347_49ef_9d0b_3f40c52bb89d ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb89e ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb89f ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a3 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a4 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a5 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a6 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a7 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a8 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a9 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8aa ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a0 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a1 : "+"component
+ddb20b45_7347_49ef_9d0b_3f40c52bb8a2 ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a1 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8ab ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a1 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8ac ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a1 : "+"parameter
+ddb20b45_7347_49ef_9d0b_3f40c52bb8ad ..> ddb20b45_7347_49ef_9d0b_3f40c52bb8a1 : "+"parameter
+
+
+note left of e_3787e043df0342c8bab7200299b751b4
+Fem General 
+configuration 
+overview
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb89f
+when false all 
+fault events of 
+this type are 
+ignored.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a3
+Defines the causal
+reconsideration window
+for a preliminary fault.
+It does not qualify
+occurrence counts or
+filter noisy reports.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a4
+Classifies the impact
+of a confirmed fault.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a5
+Orders confirmed faults
+for handling. A lower
+value means higher priority.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a6
+Maps a confirmed fault
+to one action: log, notify,
+degrade, restart, quarantine,
+or fail-safe.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a7
+Defines when and where
+a confirmed fault is
+escalated.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a8
+Selects time-window,
+occurrence-count, or
+hybrid qualification.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a9
+Sets the minimum number
+of failure reports needed
+to qualify a fault.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8aa
+Defines the time interval
+used to count failure
+reports for qualification.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a1
+Configures a fault-reporting
+component and its event
+ownership.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8a2
+When false, new fault reports
+from this component are not
+accepted by FEM.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8ab
+Unique identifier of the
+fault-reporting component.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8ac
+References the optional parent
+component used for causal
+fault evaluation.
+end note
+
+note left of ddb20b45_7347_49ef_9d0b_3f40c52bb8ad
+Defines component-level
+arbitration priority. A lower
+value means higher priority.
+end note

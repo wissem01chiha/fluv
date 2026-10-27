@@ -1,0 +1,9 @@
+!include ../system/template.iuml
+
+package "Data Input Manager" as e_c10be6d92cd24152af1ba3423dc03bce {
+    component "Data Provider" <<Grouping>> as e_2c2ec89bbe754a62b4d7060b583e98d2
+    component "Data Request Handler SubSystem" <<Grouping>> as e_6b5b3db3d9bb4056bf71d4bf8661123d
+    component "Data Source System" <<Grouping>> as e_6f9661cf801a4cc1b6a64549396bd26f
+    component "Input Cache System" <<Grouping>> as e_ac883011a30148e6abdd19006d716b46
+
+}

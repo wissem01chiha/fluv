@@ -1,0 +1,17 @@
+!include ../system/template.iuml
+
+package "Component Library Manager" as e_clm #F4CCCC {
+
+  rectangle "ClmComponent" <<component>> as e_clm_com
+}
+
+note left of e_clm
+This package contains 
+the Component 
+Library Manager, 
+which is responsible 
+for managing the 
+libraries of 
+components used
+in the system.
+end note

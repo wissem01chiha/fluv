@@ -1,0 +1,89 @@
+@startuml SystemTopLevelBehaviour
+
+title RIVUS - System Top Level Behaviour
+
+actor "External Client" as Client
+participant "Component Library Manager" as Clm
+participant "Component Version Manager" as Cvm
+participant "Component Enabler Manager" as Cem
+participant "Build System Manager" as Bsm
+participant "Engine Version Manager" as Evm
+participant "Engine Caching System" as Ecm
+participant "Engine Performance Manager" as Epm
+participant "Data Input Manager" as DIm
+participant "Data IO Manager" as DIom
+participant "Data Processing System" as Dpm
+participant "Data Output Manager" as Dom
+participant "Token Pool Manager" as Tpm
+participant "Token Transmission Manager" as Ttm
+participant "Logical Execution Timer" as Let
+participant "Execution Manager" as Exm
+participant "Engine Event Manager" as Eem
+participant "Diagnostic Event Manager" as Dem
+participant "Diagnostic Logging Manager" as Dlm
+participant "Fault Event Manager" as Fem
+participant "Failsoft System" as Fsm
+participant "Watchdog Manager" as Wdm
+participant "Debugger Manager" as Dbm
+participant "Engine Runtime" as Runtime
+
+Client -> Clm: Request component composition
+Clm -> Cvm: Resolve component versions
+Cvm --> Clm: Return compatible versions
+Clm -> Cem: Enable selected components
+Cem --> Clm: Components enabled
+Clm -> Bsm: Load composition configuration
+Bsm -> Evm: Validate engine version
+Evm --> Bsm: Version accepted
+Bsm -> Ecm: Read cached build configuration
+Ecm --> Bsm: Return cached configuration
+Bsm --> Client: Composition ready
+
+
+Client -> DIm: Submit input data
+DIm -> DIom: Normalize input stream
+DIom -> Dpm: Deliver input data
+Dpm -> Tpm: Acquire execution token
+Tpm -> Ttm: Reserve token transmission
+Ttm --> Tpm: Transmission channel ready
+Tpm --> Dpm: Execution token granted
+Dpm -> Let: Start execution timer
+Let -> Exm: Schedule execution unit
+Exm -> Runtime: Execute configured composition
+Exm -> Epm: Report execution performance
+Epm -> Eem: Publish performance metrics
+Runtime -> Eem: Publish execution event
+Eem -> Dem: Forward diagnostic event
+Dem -> Dlm: Record execution diagnostic
+Dlm --> Dem: Diagnostic stored
+Runtime --> Exm: Return execution result
+Exm -> Let: Stop execution timer
+Exm -> Dom: Publish output data
+Dom -> DIom: Serialize output stream
+DIom --> Client: Return output data
+
+Wdm -> Runtime: Check runtime heartbeat
+Runtime --> Wdm: Heartbeat status
+alt Fault detected
+    Runtime -> Fem: Report fault event
+    Fem -> Dem: Publish fault diagnostic
+    Dem -> Dlm: Log fault context
+    Fem -> Fsm: Request failsoft action
+    Fsm -> Runtime: Apply degraded operation
+    Fsm -> Wdm: Confirm controlled recovery
+else No fault detected
+    Wdm --> Runtime: Continue operation
+end
+
+Client -> Dbm: Request execution trace
+Dbm -> Eem: Query execution events
+Eem --> Dbm: Return event trace
+Dbm --> Client: Return debug information
+Client -> Runtime: Stop composition
+Runtime -> Ttm: Release token transmission
+Ttm -> Tpm: Return execution token
+Tpm -> Ecm: Persist runtime state
+Ecm --> Runtime: State persisted
+Runtime --> Client: Shutdown complete
+
+@enduml

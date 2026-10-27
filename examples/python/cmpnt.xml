@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  fluv component (node) definition.
+  Model follows "Dataflow and Reactive Programming Systems" (M. Carkci):
+  node = ports + firing patterns + activation function.
+  Arcs and node instances are NOT defined here; they belong to the network file.
+ 
+ Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License. 
+ */
+-->
+<fluv:component xmlns:fluv="urn:fluv:component:1"
+    name="adder"
+    version="1.0.0"
+    abi="1"
+    kind="primitive">
+
+  <description>Adds two integers. Passes poisoned tokens to the error port.</description>
+
+  <!-- ===================== Token types ===================== -->
+  <!-- All tokens are fixed width (64 bytes). Types refine the payload. -->
+  <types>
+    <import href="fluv/std.types.xml"/>            <!-- i64, f64, bytes, ref, any -->
+    <type name="sample_t" id="1001" width="64">
+      <field name="value"     type="f64"/>
+      <field name="timestamp" type="u64"/>
+      <field name="channel"   type="u16"/>
+    </type>
+  </types>
+
+  <!-- ===================== Input ports ===================== -->
+  <inputs>
+    <port index="0" name="a"      type="i64"  capacity="16" consume="true"/>
+    <port index="1" name="b"      type="i64"  capacity="16" consume="true"/>
+    <!-- Sticky/constant port: the token is read but not removed (book: constant input) -->
+    <port index="2" name="offset" type="i64"  capacity="1"  consume="false">
+      <initial>0</initial>
+    </port>
+    <!-- Control port: fires a reset without data -->
+    <port index="3" name="reset"  type="any"  capacity="1"  consume="true" role="control"/>
+  </inputs>
+
+  <!-- ===================== Output ports ===================== -->
+  <outputs>
+    <port index="0" name="sum" type="i64"/>
+    <port index="1" name="err" type="any"/>
+  </outputs>
+
+  <!-- ===================== Firing rules ===================== -->
+  <!--
+    Each pattern lists the required state of every input port:
+      exists   : at least one token must be present
+      empty    : no token may be present
+      dontcare : ignored
+    Patterns are evaluated in priority order; the first match fires,
+    and its entry function is executed.
+  -->
+  <firing evaluation="priority">
+    <pattern name="reset" priority="0" entry="adder_on_reset">
+      <in port="reset"  state="exists"/>
+      <in port="a"      state="dontcare"/>
+      <in port="b"      state="dontcare"/>
+      <in port="offset" state="dontcare"/>
+    </pattern>
+
+    <pattern name="add" priority="1" entry="adder_main">
+      <in port="reset"  state="empty"/>
+      <in port="a"      state="exists"/>
+      <in port="b"      state="exists"/>
+      <in port="offset" state="exists"/>
+    </pattern>
+  </firing>
+
+  <!-- ===================== Activation ===================== -->
+  <!--
+    mode: push     = data-driven (fires when a pattern matches)
+          pull     = demand-driven (fires when downstream requests)
+          event    = fires on external event
+  -->
+  <activation mode="push" sync="async"/>
+
+  <!-- ===================== Parameters (instance config) ===================== -->
+  <params>
+    <param name="scale" type="f64" default="1.0"/>
+  </params>
+
+  <!-- ===================== State ===================== -->
+  <state struct="adder_state" size="auto"/>
+
+  <!-- ===================== Implementation binding ===================== -->
+  <implementation>
+    <init  symbol="adder_init"/>
+    <entry symbol="adder_main"/>
+    <entry symbol="adder_on_reset"/>
+    <fini  symbol="adder_fini"/>
+    <!-- For other languages, e.g. language="lua": <script href="adder.lua"/> -->
+  </implementation>
+
+  <!-- ===================== Fail-soft policy ===================== -->
+  <failsoft>
+    <on-poison action="forward" port="err"/>   <!-- forward | drop | default -->
+    <on-error  action="retry"   max="3" then="dlq"/>
+    <timeout   ms="50" action="default"/>
+  </failsoft>
+</fluv:component>

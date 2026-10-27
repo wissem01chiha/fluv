@@ -1,0 +1,8 @@
+!include ../system/template.iuml
+
+package "Data Output Manager" as e_172b58bcfd5a4bd09c7bd4e56f812ab5 {
+    component "Data Write Request Handler" <<Grouping>> as e_de00e93b38274114b6fa4148a8239a23
+    component "Grouping" <<Grouping>> as e_db90260d2de44731986ece4ebf771f41
+    component "Grouping" <<Grouping>> as e_1fbca06ef6914841bffd1f12182cf632
+    component "Grouping" <<Grouping>> as e_01fa6ec2c3134638afa06dd89de27379
+}

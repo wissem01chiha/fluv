@@ -1,0 +1,38 @@
+left to right direction
+skinparam linetype spline
+skinparam shadowing false
+
+skinparam backgroundColor #ffffff
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontColor black
+skinparam ArrowColor #5f0115
+
+skinparam package {
+    BackgroundColor #ffffff
+    BorderColor #303030
+    FontColor Black
+    FontStyle Bold
+}
+
+skinparam component {
+    BackgroundColor #ffffff
+    BorderColor #5f0115
+    FontColor Black
+}
+
+skinparam note {
+    BackgroundColor #FFF2CC
+    BorderColor #D6B656
+    FontColor Black
+}
+
+skinparam class {
+    BackgroundColor #DFF0D8
+    BorderColor #5f0115
+    ArrowColor #5f0115
+}
+
+skinparam rectangle {
+    BackgroundColor #E8E8E8
+    BorderColor Black
+}

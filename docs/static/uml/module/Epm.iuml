@@ -1,0 +1,7 @@
+!include ../system/template.iuml
+ 
+ 
+  package "Engine Performace Manager" as e_134697d4c0bf41e1b72148def9c115af {
+    component "Node Performence Profilier" <<component>> as e_36bdf41c98e64ca496506dc33f0d9710
+    component "Componat Per Manger" <<component>> as e_72a5905a20644268a00ef910ceb293b2
+  }

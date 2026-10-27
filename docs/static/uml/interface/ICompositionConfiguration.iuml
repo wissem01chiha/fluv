@@ -1,0 +1,9 @@
+!include ../system/template.iuml
+
+interface "IComponentConfiguration"  as e_1f3b93635b2a4a2881df21a1b13089b2 {
+    +function GetComponentName() : string
+    +function GetComponentVersion() : string
+    +function GetComponentType() : string
+    +function GetComponentDependencies() : list<string>
+    +function GetComponentBuildFlags() : list<string>
+}

@@ -1,0 +1,176 @@
+!include ../system/template.iuml
+
+package "Component Runtime Monitor" as e_rtm_module #FCE5CD {
+
+    rectangle "ConfigSet" <<parameter>> as e_rtm_config_set
+    rectangle "ComponentMonitoring" <<component>> as e_rtm_component_monitoring
+    rectangle "ComponentId" <<parameter>> as e_rtm_component_id
+    rectangle "ComponentRef" <<parameter>> as e_rtm_component_ref
+    rectangle "MaxExecutionTime" <<parameter>> as e_rtm_max_execution_time
+    rectangle "MonitoringStrategy" <<parameter>> as e_rtm_monitoring_strategy
+
+    rectangle "Threshold" <<component>> as e_rtm_threshold
+    rectangle "ThresholdValue" <<parameter>> as e_rtm_threshold_value
+    rectangle "ThresholdAction" <<parameter>> as e_rtm_threshold_action
+
+    rectangle "Aggregation" <<component>> as e_rtm_aggregation
+    rectangle "AggregationEnabled" <<parameter>> as e_rtm_aggregation_enabled
+    rectangle "AggregatedComponentRefs" <<parameter>> as e_rtm_aggregated_component_refs
+    rectangle "AggregationWindow" <<parameter>> as e_rtm_aggregation_window
+
+    rectangle "Notification" <<component>> as e_rtm_notification
+    rectangle "AlertTarget" <<parameter>> as e_rtm_alert_target
+    rectangle "NotificationMode" <<parameter>> as e_rtm_notification_mode
+
+}
+
+e_rtm_component_monitoring ..> e_rtm_config_set : "+"ConfigSet
+e_rtm_component_id ..> e_rtm_component_monitoring : "+"parameter
+e_rtm_component_ref ..> e_rtm_component_monitoring : "+"parameter
+e_rtm_max_execution_time ..> e_rtm_component_monitoring : "+"parameter
+e_rtm_monitoring_strategy ..> e_rtm_component_monitoring : "+"parameter
+
+e_rtm_threshold ..> e_rtm_component_monitoring : "+"component
+e_rtm_threshold_value ..> e_rtm_threshold : "+"parameter
+e_rtm_threshold_action ..> e_rtm_threshold : "+"parameter
+
+e_rtm_aggregation ..> e_rtm_component_monitoring : "+"component
+e_rtm_aggregation_enabled ..> e_rtm_aggregation : "+"parameter
+e_rtm_aggregated_component_refs ..> e_rtm_aggregation : "+"parameter
+e_rtm_aggregation_window ..> e_rtm_aggregation : "+"parameter
+
+e_rtm_notification ..> e_rtm_component_monitoring : "+"component
+e_rtm_alert_target ..> e_rtm_notification : "+"parameter
+e_rtm_notification_mode ..> e_rtm_notification : "+"parameter
+
+note left of e_rtm_module
+Rtm General
+configuration
+overview
+end note
+
+note left of e_rtm_config_set
+This container contains the
+configuration parameters and
+subcontainers of the Rtm
+module, one instance per
+monitored engine.
+end note
+
+note left of e_rtm_component_monitoring
+This container configures the
+runtime monitoring for a single
+engine component, one instance
+per monitored component.
+end note
+
+note left of e_rtm_component_ref
+Reference to the engine
+component or component
+instance being monitored.
+Multiple instances may
+reference the same component.
+end note
+
+note left of e_rtm_max_execution_time
+Maximum allocated execution
+time for the referenced
+component, in the unit
+defined by the engine
+time base.
+end note
+
+note left of e_rtm_monitoring_strategy
+Selects the monitoring
+strategy applied to this
+component: SingleInstance
+triggers an alert as soon as
+one instance exceeds
+RtmMaxExecutionTime, while
+TimeoutAggregation combines
+the execution time of all
+references to the same
+component before comparing
+against the threshold.
+end note
+
+note left of e_rtm_threshold
+This container contains the
+threshold definition and the
+action taken when the
+threshold is breached.
+end note
+
+note left of e_rtm_threshold_value
+The execution time value
+that, when exceeded,
+constitutes a threshold
+breach.
+end note
+
+note left of e_rtm_threshold_action
+Defines what happens on a
+breach, e.g. raise an alert
+only, or additionally request
+a failsafe reaction.
+end note
+
+note left of e_rtm_aggregation
+This container is only
+present when
+RtmMonitoringStrategy is set
+to TimeoutAggregation. It
+aggregates the execution
+times of all references to the
+same component.
+end note
+
+note left of e_rtm_aggregation_enabled
+Enables aggregation of
+execution times across all
+references to the same
+component instead of
+evaluating each reference
+individually.
+end note
+
+note left of e_rtm_aggregated_component_refs
+The set of component
+references whose execution
+times are summed for this
+aggregation group.
+end note
+
+note left of e_rtm_aggregation_window
+The time window over which
+the aggregated execution
+time is accumulated before
+being compared against
+RtmThresholdValue.
+end note
+
+note left of e_rtm_notification
+This container configures how
+a threshold breach is reported
+once RtmThreshold has
+triggered.
+end note
+
+note left of e_rtm_alert_target
+Reference to the Engine Event
+Module (Eem), which
+dispatches the alert to the
+Diagnostic Event Manager
+(Dem) and to the Failsafe
+Manager (Fsm) so the engine
+can keep running in a
+degraded, failsafe mode.
+end note
+
+note left of e_rtm_notification_mode
+Defines whether the alert is
+sent immediately, or batched
+with other pending alerts
+before being forwarded to
+the Eem.
+end note

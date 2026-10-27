@@ -1,0 +1,64 @@
+!include ../system/template.iuml
+
+package "Watchdog Module" as m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354 #E2F0D9 {
+
+    component "Heartbeat Monitor" <<component>> as e_e4137195d1634cab9637007e42cfb933{
+
+    }
+    component "Resource Monitor" <<component>> as e_9d2b1380832940289c242dd10f3837b1{
+        
+    }
+    component "Runtime Monitor" <<component>> as e_7b4647f06d6e41eb9a8c7b338fd0483e{
+        
+    }
+    component "Performance Monitor" <<component>> as e_fc30874f2c8e4923852fb18e740b8d8e{
+        
+    }
+
+}
+
+note left of m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354
+This module monitors the 
+health and performance 
+of nodes within the 
+system.
+end note
+
+'the heartbeat signals of nodes are monitored to ensure 
+' they are active and responsive, at each componat startup it sends( the componat a wakeup signal
+' to the watchdog module, depending on the configuration of the heartbeat component.
+' it starts monitoring the heartbeat signals of the nodes, at a fixed internal, for some cases this will be costly.
+' for high performance scenarios, so this can be disabled if necessary.
+note left of e_e4137195d1634cab9637007e42cfb933
+This component 
+monitors 
+the 
+heartbeat signals of 
+nodes 
+to ensure they are 
+active 
+and responsive.
+end note
+
+
+'requirment on the Runtime Monitor:
+'the runtime monitor should track the execution time of components and alert if they exceed predefined thresholds.
+' the runtime monitor should be configurable to define what constitutes a threshold breach.
+' it should provide alerts or notifications when thresholds are exceeded.
+' it should allow for multiple components to be monitored simultaneously.
+' the RM has multiple monotring startegies, 
+' it tigger an alreat when a single instanance componnat depass the maxiuim allocated time for excution
+' when multiple refrences are used in the engine refrenning to the same component
+' it should aggregate the execution times of all references to the same component and trigger an alert if the combined time exceeds the threshold.
+' this is in timout aggregation mode
+' what happens if this cases occur?
+' the RM sends an evnet to the Engine event module Eem , they this 
+' the Eem dispacthes the clla to Dem and the Fsm to handl it as a failsoft and keep engine running
+' what interface services it provide ? 
+note left of e_7b4647f06d6e41eb9a8c7b338fd0483e
+This component 
+monitors the running 
+time of a given 
+component or 
+multiple ones
+end note

@@ -1,0 +1,59 @@
+!include ../system/template.iuml
+
+package "Build System Module" as e_4fee82837c9845d09e9aab75a7c6770e #FFF2CC {
+package "Build Configuration System" as e_df76698cc31c4e1895ad241a639644b1 {
+    component "Build Configuration Interfaces" <<component>> as e_0f3b93635b2a4a2881df21a1b13089b2
+        interface "IComponentConfiguration" <<interface>> as e_bsm_component_configuration
+        interface "IEngineConfiguration" <<interface>> as e_bsm_engine_configuration
+        interface "ICompositionConfiguration" <<interface>> as e_bsm_composition_configuration
+
+}
+package "Build System Analysis" as e_f6a1429405904c60a8c7a286d23d8233 {
+    component "Binary Size Analysis" <<component>> as e_8a21e80050ca4ffda514bccd4fe736a0
+    component "Build Graph Analysis" <<component>> as e_cd61c065d5da4930acb140e760667062
+}
+package "Header Generator System" as e_dc233a54503246f2b70d3a83576da664 {
+    component "PCH Header Tool" <<component>> as e_7168039182274f74bfb99f165b388415
+    component "Composition Header Tool" <<component>> as e_4c4496364fce46058afb95444ed3d819
+    component "Header Object Tool" <<component>> as e_89557c4cd018400fa7c629ab578372ca
+}
+component "Build Automation" <<Grouping>> as e_ffb716891ace4780979ccd1392a5d67d
+package "Build Generator System" as e_450d22ff222f4f14af69319ba04a4e04 {
+    component "External Dependency Tool" <<component>> as e_ff83d202473c4c03afc93bde55476a46
+    component "CMake Generator" <<component>> as e_aba21181c45446e496fcee37f5746607
+    component "Graph Generator" <<component>> as e_6d39ce4465604d4b984d8f79952c2583
+    component "Compiler Flags Generator" <<component>> as e_8e2d2759aa854f4ba868cfe3dda67a23
+}
+}
+
+e_0f3b93635b2a4a2881df21a1b13089b2 ..> e_bsm_component_configuration : provides
+e_0f3b93635b2a4a2881df21a1b13089b2 ..> e_bsm_engine_configuration : provides
+e_0f3b93635b2a4a2881df21a1b13089b2 ..> e_bsm_composition_configuration : provides
+
+note right of e_bsm_component_configuration
+The Build System Module is responsible 
+for managing the build 
+process of the system.
+It includes components for
+end note
+
+note right of e_bsm_engine_configuration
+The Build System Module is responsible
+for managing the build
+process of the system.
+end note
+
+note right of e_bsm_composition_configuration
+The Build System Module is responsible
+for managing the build
+process of the system.
+end note
+
+note left of e_7168039182274f74bfb99f165b388415
+The precompiled header 
+tool
+is responsible for 
+generating 
+precompiled headers 
+for the system.
+end note

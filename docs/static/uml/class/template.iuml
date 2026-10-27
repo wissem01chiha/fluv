@@ -1,0 +1,8 @@
+!include ../system/template.iuml
+
+class "Class Template" <<class>>  {
+  +attribute1: int
+  +attribute2: string
+  +method1(): void
+  +method2(param: int): string
+}

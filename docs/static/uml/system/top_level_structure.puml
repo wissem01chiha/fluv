@@ -1,0 +1,90 @@
+@startuml SystemTopLevelStructure
+!include template.iuml
+title RIVUS - System Top Level Structure
+
+package "Engine" {
+
+  package "Component Enabler Module" as m_53b6d742_f9fe_4df7_8680_7d16df93688d #DDEBF7 {
+  }
+  package "Diagnostic Event Module" as m_9f3b6e21_7a44_4c92_8d15_6b2e8f0a1c37 #D9EAD3 {
+  }
+  package "Fault Event Module" as m_7c18a4e9_2d63_4f80_91ab_5e37d6c0b248 #CFE2F3 {
+  }
+  package "Logical Execution Module" as m_2a6f0d84_91c5_4be7_8a32_5d19e6f0c743 #FCE5CD {
+  }
+  package "Diagnostic Logging Module" as m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063 #EADCF8 {
+  }
+  package "Component Version Module" as m_6b14e9d2_3f70_48ac_85e1_9c26d4a7b058 #D9E1F2 {
+  }
+  package "Watchdog Module" as m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354 #E2F0D9 {
+  }
+  package "Execution Module" as m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058 #F8D7DA {
+  }
+  package "Build System Module" as m_b4e7c2d9_1f53_48a6_90d8_6c27e5f0a314 #FFF2CC {
+  }
+  package "Data IO Module" as m_c8f1d6a3_4b72_45e9_8c20_7d53a6f0b184 #D0E0E3 {
+  }
+  package "Data Input Module" as m_d2a7f0c5_9e31_46b8_84d2_5c18e7f0a643 #EAF4E2 {
+  }
+  package "Data Processing Module" as m_e6b3c9f1_2d74_48a0_95e8_7c16f0b5d243 #EAD1DC {
+  }
+  package "Engine Version Module" as m_f0c4a8d2_6e35_49b1_83f7_2c18d5a0e746 #E8DAEF {
+  }
+  package "Engine Configuration Module" as m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563 #CFE8EF {
+  }
+  package "Engine Package Module" as m_11b7e4c9_2d68_45f0_8a13_6c29d5e7f042 #F9E2C7 {
+  }
+  package "Task Timing Module" as m_12c8f5d0_3e79_46a1_9b24_7d18e6f0c543 #DDE7F2 {
+  }
+  package "Data Output Module" as m_13d9a6e1_4f80_47b2_8c35_2e18f0a7d564 #F6D5C3 {
+  }
+  package "Task Processing Module" as m_14e0b7f2_5a91_48c3_9d46_7f18c6a0e253 #FFF4D6 {
+  }
+  package "Engine Event Module" as m_15f1c8a3_6b02_49d4_8e57_2c18d7f0a364 #D8F3DC {
+  }
+  package "Failsoft System" as m_16a2d9b4_7c13_40e5_9f68_3d18c6a0b275 #F4F4F4 {
+  }
+  package "Engine Update Module" as m_19d5e0c6_7f34_4a8b_9c15_6d18e7f0b497 #D9E1F2 {
+  }
+}
+
+package "SDK" {
+  package "Component Library Module" as m_17b3e0c5_8d24_41f6_a079_4e18c7f0b386 #F4CCCC {
+  }
+  package "Debugger Module" as m_18c4f1d6_9e35_42a7_b180_5f29d8e0c497 #E6E6E6 {
+  }
+  package "Engine Performance Module" as m_18c4f1d6_9e35_42a7_b180_5f29d8e0c494 #E6E6E6 {
+  }
+  package "Engine Testing Module" as m_18c4f1d6_9e35_42a7_b180_5f29d8e0c499 #E6E6E6 {
+  }
+  package "Engine Fuzzer Module" as m_18c4f1d6_9e35_42a7_b180_5f29d8e0c498 #E6E6E6 {
+  }
+}
+
+m_9f3b6e21_7a44_4c92_8d15_6b2e8f0a1c37 ..> m_15f1c8a3_6b02_49d4_8e57_2c18d7f0a364
+m_7c18a4e9_2d63_4f80_91ab_5e37d6c0b248 ..> m_9f3b6e21_7a44_4c92_8d15_6b2e8f0a1c37
+m_d2a7f0c5_9e31_46b8_84d2_5c18e7f0a643 --> m_c8f1d6a3_4b72_45e9_8c20_7d53a6f0b184
+m_e6b3c9f1_2d74_48a0_95e8_7c16f0b5d243 --> m_14e0b7f2_5a91_48c3_9d46_7f18c6a0e253
+m_14e0b7f2_5a91_48c3_9d46_7f18c6a0e253 --> m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058
+m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058 --> m_13d9a6e1_4f80_47b2_8c35_2e18f0a7d564
+m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563 ..> m_d2a7f0c5_9e31_46b8_84d2_5c18e7f0a643
+m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563 ..> m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058
+m_11b7e4c9_2d68_45f0_8a13_6c29d5e7f042 ..> m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563
+m_6b14e9d2_3f70_48ac_85e1_9c26d4a7b058 ..> m_11b7e4c9_2d68_45f0_8a13_6c29d5e7f042
+m_f0c4a8d2_6e35_49b1_83f7_2c18d5a0e746 ..> m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563
+m_b4e7c2d9_1f53_48a6_90d8_6c27e5f0a314 ..> m_17b3e0c5_8d24_41f6_a079_4e18c7f0b386
+m_b4e7c2d9_1f53_48a6_90d8_6c27e5f0a314 ..> m_10a6d3f8_5c27_4eb0_91d4_7f18c2a9e563
+m_b4e7c2d9_1f53_48a6_90d8_6c27e5f0a314 ..> m_11b7e4c9_2d68_45f0_8a13_6c29d5e7f042
+m_53b6d742_f9fe_4df7_8680_7d16df93688d ..> m_17b3e0c5_8d24_41f6_a079_4e18c7f0b386
+m_12c8f5d0_3e79_46a1_9b24_7d18e6f0c543 ..> m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058
+m_2a6f0d84_91c5_4be7_8a32_5d19e6f0c743 ..> m_12c8f5d0_3e79_46a1_9b24_7d18e6f0c543
+m_15f1c8a3_6b02_49d4_8e57_2c18d7f0a364 ..> m_d2a7f0c5_9e31_46b8_84d2_5c18e7f0a643
+m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354 ..> m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058
+m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354 ..> m_16a2d9b4_7c13_40e5_9f68_3d18c6a0b275
+m_7c18a4e9_2d63_4f80_91ab_5e37d6c0b248 --> m_16a2d9b4_7c13_40e5_9f68_3d18c6a0b275
+m_16a2d9b4_7c13_40e5_9f68_3d18c6a0b275 ..> m_8d27f1a6_5c43_4eb9_90d2_7a18c6f0b354
+m_18c4f1d6_9e35_42a7_b180_5f29d8e0c497 ..> m_15f1c8a3_6b02_49d4_8e57_2c18d7f0a364
+m_18c4f1d6_9e35_42a7_b180_5f29d8e0c497 ..> m_a1c5e8f3_7b29_46d0_8e14_3f62b9c7d058
+
+
+@enduml

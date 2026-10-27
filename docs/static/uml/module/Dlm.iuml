@@ -1,0 +1,49 @@
+!include ../system/template.iuml
+
+package "Diagnostic Logging Module" as m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063 #EADCF8 {
+
+class "LogInfoType" {
+    AppIdCount : int
+    AppIdInfo  : string
+}
+
+enum "MessageLogLevelType " {
+    Error : int
+    Warning : int
+    Info : int
+    Debug : int
+}
+
+enum "MessageTraceType" {
+   TraceVariable : int
+}
+
+}
+
+interface "ControlService" as m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b064{
+    +GetDefaultLogLevel() 
+    +SetLogLevel()
+    +GetLogLevel()
+    +GetLogInfo()
+    +SetMessageFiltering()
+}
+
+interface "SessionControl" as m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b065 {
+    +LogLevelChangedNotification()
+}
+
+interface "MessageService" as m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b066 {
+    +SendLogMessage()
+    +SendTraceMessage()
+
+}
+
+m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063 ..> m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b065 : Implement
+m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063 ..> m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b064 : Implement
+m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063 ..> m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b066 : Implement
+
+note left of m_4e82b1c7_6d39_45fa_90a4_2f18c5e7b063
+This module handles
+diagnostic logging
+within the system.
+end note

@@ -1,0 +1,7 @@
+!include ../system/template.iuml
+
+
+Component "Engine Caching System" as e_5ef0f887c9a848e09d203cc4385e083b <<component>> {
+  interface "ICacheSystem" <<interface>> as e_5ef0f887c9a848e09d203cc4385e083b_interface
+  e_5ef0f887c9a848e09d203cc4385e083b ..|> e_5ef0f887c9a848e09d203cc4385e083b_interface
+}

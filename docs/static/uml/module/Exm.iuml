@@ -1,0 +1,9 @@
+!include ../system/template.iuml
+  
+package "Execution Unit" as e_59b085468f4747428cb68a2f07974bb4 {
+    component "Task Scheduler" <<component>> as e_2f5c096513054b02b1b24488ab4b3d02
+    component "Execution Manager" <<component>> as e_a5cde8abcb004ed5bd1ee5a82da27f01
+    component "Clock Scheduler" <<component>> as e_f943e650727a4866af595f7f0ffd04bf
+    component "Task Queue" <<component>> as e_3d2fbcd032544e76ba4dcc65767bbe8a
+    component "Dead Node Elimination System" <<component>> as e_7093c5186d254bda9057590675b26119
+}

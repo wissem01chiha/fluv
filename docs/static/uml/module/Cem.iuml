@@ -1,0 +1,3 @@
+!include ../system/template.iuml
+
+component "Componenat Enabler Manager" <<Grouping>> as e_803e4e0ca5f94006bd70e5ced85707ed

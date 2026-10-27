@@ -1,0 +1,18 @@
+!include ../system/template.iuml
+
+package "Logical Execution Timer" as e47820f8_b75d_45db_9e7a_0852a82068cf #FCE5CD {
+
+rectangle "LetComponent" <<parameter>> as e_4035f90f_2638_43fc_98c0_b013c41210da
+rectangle "LogicalTimeScale" <<parameter>> as e_ab160aab_e315_4f3f_9c10_895ba7027455 
+
+
+}
+
+e_ab160aab_e315_4f3f_9c10_895ba7027455 ..> e_4035f90f_2638_43fc_98c0_b013c41210da : "+"parameter
+
+
+note left of e_ab160aab_e315_4f3f_9c10_895ba7027455 
+Let General 
+configuration 
+overview
+end note

@@ -1,0 +1,7 @@
+!include ../system/template.iuml
+
+package "Component Version Manager" as e_91f9aeb031a44b65971963a7a2947596 {
+  component "Version Parser" <<component>> as e_d020da42aa754edc8772a22ec8f4420b
+  component "Version Compatibility Validator" <<component>> as e_c09b9f3042a846ffa36ce1ee606f8258
+  component "Version Comparator" <<component>> as e_c3a011505c174de099a2c3712a231f90
+}

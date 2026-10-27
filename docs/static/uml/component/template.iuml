@@ -1,0 +1,13 @@
+!include ../system/template.iuml
+
+component "ComponentTemplate" <<component>> {
+
+}
+
+interface "IComponentTemplate" <<interface>> {
+  +void Initialize()
+  +void Execute()
+  +void Terminate()
+}
+
+ComponentTemplate ..> IComponentTemplate : Provides

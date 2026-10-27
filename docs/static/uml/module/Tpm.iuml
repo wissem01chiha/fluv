@@ -1,0 +1,3 @@
+!include ../system/template.iuml
+
+component "Token Pool Manager" <<Grouping>> as e_8ce3837b45ae4235b9f55dc67d4e0273

@@ -1,0 +1,8 @@
+!include ../system/template.iuml
+
+package "Failsoft System" as f38a2175_0e55_4799_a6d1_46d26538a71c {
+    
+    component "Component Timeout Manager" <<component>> as e_b293a58c59c04e51b289d7ee73ab625e
+    component "Dead Letter Queue Manager" <<component>> as e_7edb9e6c35b345edb070f87a1adf23fc
+    component "Component Failure Manager" <<component>> as e_configuration_manager
+}
