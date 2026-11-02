@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
 #ifndef FVERRNO_H
 #define FVERRNO_H
@@ -19,11 +19,11 @@
 #include "fluv/fvtypes.h"
 
 typedef enum {
-    FV_SUCCESS = 0,
-    FV_ERROR_UNKNOWN = -1,
-    FV_ERROR_INVALID_ARGUMENT = -2,
-    FV_ERROR_OUT_OF_MEMORY = -3,
-    FV_ERROR_NOT_FOUND = -4
+  FV_SUCCESS = 0,
+  FV_ERROR_UNKNOWN = -1,
+  FV_ERROR_INVALID_ARGUMENT = -2,
+  FV_ERROR_OUT_OF_MEMORY = -3,
+  FV_ERROR_NOT_FOUND = -4
 } fv_error_t;
 
 #endif // FVERRNO_H
